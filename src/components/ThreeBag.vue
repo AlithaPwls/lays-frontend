@@ -33,53 +33,71 @@ function createTexture() {
 
 
 function redrawTexture() {
-  // Zak achtergrondkleur
+  const W = textureCanvas.width;
+  const H = textureCanvas.height;
+
+  // Achtergrond
   ctx.fillStyle = props.color;
-  ctx.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
+  ctx.fillRect(0, 0, W, H);
 
-  // ——————————————
-  // TITEL (kleiner + mooi gecentreerd)
-  // ——————————————
-  ctx.fillStyle = "#ffffff";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  // ============================
+  // ⭐ ALTJD LAYS LOGO ⭐
+  // ============================
+  const logo = new Image();
+  logo.src = "/logo-nobg.png";
+  logo.onload = () => {
+    ctx.drawImage(
+      logo,
+      W * 0.14,   // 25% van breedte → mooi gecentreerd
+      H * 0.05,   // 5% onder top
+      W * 0.20,   // 50% breedte
+      H * 0.18    // 18% hoogte
+    );
+    texture.needsUpdate = true;
+  };
 
+  // ============================
+  // TITEL BOVEN MIDDEN
+  // ============================
   if (props.title) {
-    ctx.font = "bold 60px Arial";   // kleinere titel
-    ctx.fillText(props.title, 250, 100); // perfect op de bovenbuik
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 45px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(props.title, W * 0.24, H * 0.27); 
   }
 
-  // ——————————————
-  // SMAAK
-  // ——————————————
+  // ============================
+  // SMAKEN
+  // ============================
   if (props.flavor) {
-    ctx.font = "20px Arial"; // kleiner
-    ctx.fillText(props.flavor, 250, 360);
+    ctx.font = "20px Arial";
+    ctx.fillText(props.flavor, W * 0.24, H * 0.40);
   }
 
-  // ——————————————
-  // AFBEELDING
-  // ——————————————
+  // ============================
+  // ACHTERGROND-IMAGE (optioneel)
+  // ============================
   if (props.image) {
     const img = new Image();
-    img.crossOrigin = "anonymous"; // nodig voor externe afbeeldingen
-
+    img.crossOrigin = "anonymous";
     img.onload = () => {
       ctx.drawImage(
         img,
-        262,
-        420,
-        500,
-        500
+        W * 0.18,
+        H * 0.48,
+        W * 0.64,
+        H * 0.45
       );
       texture.needsUpdate = true;
     };
-
     img.src = props.image;
   }
 
   texture.needsUpdate = true;
 }
+
+
 
 
 // -------------------------------------------------------
