@@ -26,41 +26,61 @@ function createTexture() {
   ctx = textureCanvas.getContext("2d");
 
   texture = new THREE.CanvasTexture(textureCanvas);
-  texture.flipY = false;
+  texture.flipY = true;
   return texture;
 }
 
+
+
 function redrawTexture() {
-  // achtergrondkleur van de zak
+  // Zak achtergrondkleur
   ctx.fillStyle = props.color;
-  ctx.fillRect(0, 0, 1024, 1024);
+  ctx.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
 
-  // titel
+  // ——————————————
+  // TITEL (kleiner + mooi gecentreerd)
+  // ——————————————
+  ctx.fillStyle = "#ffffff";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
   if (props.title) {
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 120px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText(props.title, 512, 200);
+    ctx.font = "bold 60px Arial";   // kleinere titel
+    ctx.fillText(props.title, 250, 100); // perfect op de bovenbuik
   }
 
-  // smaak
+  // ——————————————
+  // SMAAK
+  // ——————————————
   if (props.flavor) {
-    ctx.font = "70px Arial";
-    ctx.fillText(props.flavor, 512, 350);
+    ctx.font = "20px Arial"; // kleiner
+    ctx.fillText(props.flavor, 250, 360);
   }
 
-  // afbeelding/logo
+  // ——————————————
+  // AFBEELDING
+  // ——————————————
   if (props.image) {
     const img = new Image();
+    img.crossOrigin = "anonymous"; // nodig voor externe afbeeldingen
+
     img.onload = () => {
-      ctx.drawImage(img, 262, 420, 500, 500);
+      ctx.drawImage(
+        img,
+        262,
+        420,
+        500,
+        500
+      );
       texture.needsUpdate = true;
     };
+
     img.src = props.image;
   }
 
   texture.needsUpdate = true;
 }
+
 
 // -------------------------------------------------------
 // SCENE INITIALISATIE
@@ -119,8 +139,8 @@ onMounted(() => {
   loader.load("/blank-bag.glb", (gltf) => {
     bagModel = gltf.scene;
 
-    bagModel.scale.set(1.6, 1.6, 1.6);
-    bagModel.position.y = 0.0;
+    bagModel.scale.set(1.3, 1.3, 1.3);
+    bagModel.position.y = -0.25;
 
     bagModel.traverse((child) => {
       if (child.isMesh) {

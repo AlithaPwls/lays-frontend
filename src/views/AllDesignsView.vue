@@ -39,12 +39,17 @@ onMounted(() => {
     <div class="grid">
       <div class="card" v-for="d in designs" :key="d._id">
 
-        <div class="preview"
+        <div 
+          class="preview"
           :style="{
             backgroundColor: d.backgroundColor,
-            backgroundImage: d.smallImageUrl ? `url(${d.smallImageUrl})` : 'none'
+            backgroundImage: d.smallImageUrl ? `url(${d.smallImageUrl})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
           }"
         >
+          <div class="overlay"></div>
+
           <p class="title" :style="{ fontFamily: d.titleFont }">
             {{ d.title }}
           </p>
@@ -53,6 +58,7 @@ onMounted(() => {
             {{ d.flavors.join(', ') }}
           </p>
         </div>
+
 
         <p><strong>Gemaakt door user:</strong> {{ d.userId }}</p>
         <p><strong>Aangemaakt op:</strong> {{ new Date(d.createdAt).toLocaleString() }}</p>
@@ -82,22 +88,42 @@ onMounted(() => {
 .preview {
   width: 100%;
   height: 300px;
-  background-size: cover;
+  position: relative;
   border-radius: 12px;
-  padding: 10px;
+  overflow: hidden;
+  padding: 15px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 8px;
+}
+
+.preview .overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/bag-shape.png'); /* SVG of PNG van zakvorm */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  opacity: 0.9;
 }
 
 .title {
   font-size: 22px;
   font-weight: bold;
+  color: white;
+  text-shadow: 0 0 5px black;
+  z-index: 3;
 }
 
 .flavors {
   font-size: 14px;
+  color: white;
+  text-shadow: 0 0 4px black;
+  z-index: 3;
 }
+
 </style>
+
+
