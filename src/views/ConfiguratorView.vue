@@ -7,11 +7,11 @@
   
     <!-- LINKERKANT – 3D PREVIEW -->
     <div class="left">
-      <h1>Ontwerp je Lays Zak</h1>
+      <h1>Design your own Lays-bag</h1>
       <ThreeBag 
         :color="selectedColor"
         :title="bagName"
-        :flavor="selectedFlavors.join(', ')"   
+        :flavor="selectedFlavors"   
         :image="bagImage"
         :font="selectedFont"
       />
@@ -22,7 +22,7 @@
     <div class="right">
 
       <!-- KLEUREN -->
-      <h3>Kies een kleur</h3>
+      <h3>Choose your color</h3>
       <div class="colors">
         <div
           v-for="c in colorOptions"
@@ -36,7 +36,7 @@
 
       <!-- NAAM OP ZAK -->
       <div class="options">
-        <h3>Naam op zak</h3>
+        <h3>Name on your bag</h3>
         <input
           v-model="bagName"
           placeholder="Typ je zak naam..."
@@ -44,17 +44,15 @@
         />
       </div>
 
-      
+
       <!-- SMAKEN -->
       <div class="options">
-        <h3>Kies smaken</h3>
-
-        <div class="flavors">
-          <label v-for="f in flavorOptions" :key="f">
-            <input type="checkbox" :value="f" v-model="selectedFlavors" />
-            {{ f }}
-          </label>
-        </div>
+        <h3>Choose flavor(s)</h3>
+        <input
+          v-model="selectedFlavors"
+          placeholder="Typ je zak naam..."
+          class="text-input"
+        />
       </div>
 
 
@@ -84,12 +82,12 @@
 
       <!-- OPSLAAN -->
       <button class="save-btn" @click="saveDesign">
-        Design Opslaan
+        Save design
       </button>
 
       <!-- RESET -->
       <button class="reset-btn" @click="resetDesign">
-        Reset
+        Reset design
       </button>
 
     </div>
