@@ -1,5 +1,9 @@
+
 <template>
+      <router-link to="/designs" class="nav-link">See all designs</router-link>
+
   <div class="page">
+
   
     <!-- LINKERKANT – 3D PREVIEW -->
     <div class="left">
@@ -29,6 +33,18 @@
         ></div>
       </div>
 
+
+      <!-- NAAM OP ZAK -->
+      <div class="options">
+        <h3>Naam op zak</h3>
+        <input
+          v-model="bagName"
+          placeholder="Typ je zak naam..."
+          class="text-input"
+        />
+      </div>
+
+      
       <!-- SMAKEN -->
       <div class="options">
         <h3>Kies smaken</h3>
@@ -41,15 +57,7 @@
         </div>
       </div>
 
-      <!-- NAAM OP ZAK -->
-      <div class="options">
-        <h3>Naam op zak</h3>
-        <input
-          v-model="bagName"
-          placeholder="Typ je zak naam..."
-          class="text-input"
-        />
-      </div>
+
 
       <!-- FONT -->
       <div class="options">
@@ -191,6 +199,7 @@ export default {
     flex: 2;
     width: 600px;
     padding: 40px;
+    background-image: url('{{ bagImage }}');
   }
 
   

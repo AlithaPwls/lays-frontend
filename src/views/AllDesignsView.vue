@@ -30,6 +30,9 @@ onMounted(() => {
 </script>
 
 <template>
+
+<router-link to="/configurator" class="nav-link">Make your own design</router-link>
+
   <div style="padding: 30px; color: white;">
 
     <h1>Alle Designs</h1>
