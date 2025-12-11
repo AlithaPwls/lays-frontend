@@ -1,3 +1,12 @@
+<script setup>
+  import { ref } from 'vue';
+  import ConfiguratorView from './views/ConfiguratorView.vue';
+
+
+</script>
+
 <template>
-  <router-view />
+  <div>
+    <ConfiguratorView />
+  </div>
 </template>
