@@ -16,6 +16,8 @@ const container = ref(null);
 let scene, camera, renderer, controls, bagModel;
 let textureCanvas, ctx, texture;
 
+const canvas = document.querySelector(".app");
+
 // -------------------------------------------------------
 // DYNAMIC TEXTURE
 // -------------------------------------------------------
@@ -134,7 +136,7 @@ onMounted(() => {
   scene.add(light2);
 
   // OrbitControls
-  controls = new OrbitControls(camera, renderer.domElement);
+  controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.minDistance = 1.3;
   controls.maxDistance = 3;
